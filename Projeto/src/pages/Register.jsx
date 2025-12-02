@@ -2,25 +2,27 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
 
-  const { login } = useAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    const success = login(email, password);
+    const result = register(nome, email, senha);
 
-    if (!success) {
-      setErro("E-mail ou senha inválidos!");
+    if (result.error) {
+      setErro(result.error);
       return;
     }
 
-    navigate("/");
+    alert("Conta criada com sucesso!");
+    navigate("/login");
   }
 
   return (
@@ -29,14 +31,23 @@ export default function Login() {
         onSubmit={handleSubmit}
         className="bg-gray-800 p-8 rounded-xl shadow-xl w-80 text-white"
       >
-        <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">Criar Conta</h1>
 
         {erro && <p className="text-red-400 mb-3">{erro}</p>}
+
+        <input
+          type="text"
+          placeholder="Nome completo"
+          className="w-full p-2 rounded mb-3 bg-gray-700"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+        />
 
         <input
           type="email"
           placeholder="E-mail"
           className="w-full p-2 rounded mb-3 bg-gray-700"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -44,17 +55,18 @@ export default function Login() {
           type="password"
           placeholder="Senha"
           className="w-full p-2 rounded mb-3 bg-gray-700"
-          onChange={(e) => setPassword(e.target.value)}
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
         />
 
         <button className="w-full bg-blue-600 p-2 rounded mt-2 hover:bg-blue-700">
-          Entrar
+          Criar Conta
         </button>
 
         <p className="text-center mt-3 text-sm">
-          Ainda não tem conta?{" "}
-          <a href="/register" className="text-blue-400">
-            Criar Conta
+          Já tem conta?{" "}
+          <a href="/login" className="text-blue-400">
+            Entrar
           </a>
         </p>
       </form>

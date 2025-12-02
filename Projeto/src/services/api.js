@@ -14,3 +14,11 @@ export async function getFilmesDoMes() {
   const json = await req.json();
   return json.results;
 }
+
+export async function getFilmePorId(id) {
+  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}

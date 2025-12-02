@@ -14,6 +14,7 @@ function MoviesCarousel({ filmes }) {
         {filmes.map((filme) => (
           <SwiperSlide key={filme.id}>
             <MovieCard
+              id  = {filme.id}
               title={filme.title}
               description={filme.overview}
               image={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
