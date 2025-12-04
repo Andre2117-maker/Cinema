@@ -1,4 +1,4 @@
-const API_KEY = "c65304086c2d7d15752eaa726ee39eb3";
+const API_KEY = import.meta.env.VITE_TMDB_KEY;
 const BASE = "https://api.themoviedb.org/3";
 
 export async function getFilmesDoMes() {
