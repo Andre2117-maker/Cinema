@@ -102,8 +102,6 @@ A API deve fornecer endpoints como:
 
 /seats/:sessionId
 
-(Se quiser, posso te ajudar a montar o backend também.)
-
 🤝 Contribuição
 
 Sinta-se livre para abrir issues e enviar pull requests.
